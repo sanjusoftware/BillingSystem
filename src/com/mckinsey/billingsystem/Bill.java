@@ -1,5 +1,7 @@
 package com.mckinsey.billingsystem;
 
+import com.mckinsey.billingsystem.user.User;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Sanjeev
@@ -7,16 +9,17 @@ package com.mckinsey.billingsystem;
  * Time: 3:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Bill {
+public class Bill {
     protected double amount;
+    private User user;
 
-    public Bill(double amount) {
+    public Bill(double amount, User user) {
         this.amount = amount;
+        this.user = user;
     }
 
     public double netPayableAmount() {
-        return amount * getDiscount() / 100;
+        return amount - amount * user.getDiscount() / 100;
     }
 
-    public abstract int getDiscount();
 }
