@@ -21,32 +21,32 @@ import static junit.framework.Assert.assertEquals;
 
 public class BillTest {
     @Test
-    public void testEmployeeShouldGet30PercentDiscount() {
+    public void testEmployeeShouldGet30PercentDiscount() throws Exception {
         assertEquals(7.0, new Bill(getNonGroceryItemsWorth(10), new Employee(new DateTime())).netPayableAmount());
     }
 
     @Test
-    public void testAffiliateShouldGet10PercentDiscount() {
+    public void testAffiliateShouldGet10PercentDiscount() throws Exception {
         assertEquals(9.0, new Bill(getNonGroceryItemsWorth(10), new Affiliate(new DateTime())).netPayableAmount());
     }
 
     @Test
-    public void testCustomerNewerThan2YearsShouldNotGetAnyDiscount() {
+    public void testCustomerNewerThan2YearsShouldNotGetAnyDiscount() throws Exception {
         assertEquals(10.0, new Bill(getNonGroceryItemsWorth(10), new Customer(new DateTime())).netPayableAmount());
     }
 
     @Test
-    public void testCustomerOlderThan2YearsShouldGetAnyDiscount() {
+    public void testCustomerOlderThan2YearsShouldGetAnyDiscount() throws Exception {
         assertEquals(9.5, new Bill(getNonGroceryItemsWorth(10), new Customer(new DateTime(2009, 1, 1, 0, 0, 0, 0))).netPayableAmount());
     }
 
     @Test
-    public void testForEvery100DollarOnBillUserShouldGet5DollarDiscount() {
+    public void testForEvery100DollarOnBillUserShouldGet5DollarDiscount() throws Exception {
         assertEquals((double) 945, new Bill(getNonGroceryItemsWorth(990), new Customer(new DateTime())).netPayableAmount());
     }
 
     @Test
-    public void testThePercentageBasedDiscountsDoNotApplyOnGroceries() {
+    public void testThePercentageBasedDiscountsDoNotApplyOnGroceries() throws Exception {
         assertEquals((double) 945, new Bill(getGroceryItemsWorth(990), new Customer(new DateTime())).netPayableAmount());
     }
 
