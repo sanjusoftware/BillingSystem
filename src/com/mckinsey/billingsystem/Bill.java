@@ -2,6 +2,8 @@ package com.mckinsey.billingsystem;
 
 import com.mckinsey.billingsystem.user.User;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Sanjeev
@@ -9,22 +11,41 @@ import com.mckinsey.billingsystem.user.User;
  * Time: 3:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Bill {
-    public static final int DISCOUNT_RATE_PER_100 = 5;
-    protected double amount;
-    private User user;
 
-    public Bill(double amount, User user) {
-        this.amount = amount;
+public class Bill {
+    private static final int DISCOUNT_RATE_PER_100 = 5;
+    private double amount;
+    private User user;
+    private List<Item> items;
+
+    public Bill(List<Item> items, User user) {
+        this.items = items;
         this.user = user;
     }
 
     public double netPayableAmount() {
-        return amount - getUserDiscount() - getBillDiscount();
+        amount = getTotalBillableAmount();
+        return amount - getBillDiscount() - getUserDiscount();
+    }
+
+    private double getTotalBillableAmount() {
+        double billableAmount = 0;
+        for (Item item : items) {
+            billableAmount += item.amount();
+        }
+        return billableAmount;
+    }
+
+    private double getDiscountableAmount() {
+        double discountableAmount = 0;
+        for (Item item : items) {
+            discountableAmount += item.discountableAmount();
+        }
+        return discountableAmount;
     }
 
     private double getUserDiscount() {
-        return amount * user.getDiscountPercentage() / 100;
+        return getDiscountableAmount() * user.getDiscountPercentage() / 100;
     }
 
     private double getBillDiscount() {
