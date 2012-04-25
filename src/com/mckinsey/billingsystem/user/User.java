@@ -16,5 +16,5 @@ public abstract class User {
         this.joiningDate = joiningDate;
     }
 
-    public abstract double getDiscount();
+    public abstract double getDiscountPercentage();
 }

@@ -17,7 +17,7 @@ public class Customer extends User {
     }
 
     @Override
-    public double getDiscount() {
+    public double getDiscountPercentage() {
         return isOlderThan2Years() ? 5 : 0;
     }
 

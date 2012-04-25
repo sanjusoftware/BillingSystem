@@ -16,7 +16,7 @@ public class Affiliate extends User {
     }
 
     @Override
-    public double getDiscount() {
+    public double getDiscountPercentage() {
         return 10;
     }
 

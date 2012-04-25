@@ -17,7 +17,7 @@ public class Employee extends User {
     }
 
     @Override
-    public double getDiscount() {
+    public double getDiscountPercentage() {
         return 30;
     }
 }

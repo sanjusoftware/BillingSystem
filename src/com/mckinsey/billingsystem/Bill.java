@@ -10,6 +10,7 @@ import com.mckinsey.billingsystem.user.User;
  * To change this template use File | Settings | File Templates.
  */
 public class Bill {
+    public static final int DISCOUNT_RATE_PER_100 = 5;
     protected double amount;
     private User user;
 
@@ -19,7 +20,15 @@ public class Bill {
     }
 
     public double netPayableAmount() {
-        return amount - amount * user.getDiscount() / 100;
+        return amount - getUserDiscount() - getBillDiscount();
+    }
+
+    private double getUserDiscount() {
+        return amount * user.getDiscountPercentage() / 100;
+    }
+
+    private double getBillDiscount() {
+        return (int) (amount / 100) * DISCOUNT_RATE_PER_100;
     }
 
 }

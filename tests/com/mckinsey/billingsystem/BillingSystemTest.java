@@ -17,18 +17,22 @@ import org.joda.time.DateTime;
 public class BillingSystemTest extends TestCase {
 
     public void testEmployeeShouldGet30PercentDiscount() {
-        assertEquals((double) 70, new Bill(100, new Employee(new DateTime())).netPayableAmount());
+        assertEquals(7.0, new Bill(10, new Employee(new DateTime())).netPayableAmount());
     }
 
     public void testAffiliateShouldGet10PercentDiscount() {
-        assertEquals((double) 90, new Bill(100, new Affiliate(new DateTime())).netPayableAmount());
+        assertEquals(9.0, new Bill(10, new Affiliate(new DateTime())).netPayableAmount());
     }
 
     public void testCustomerNewerThan2YearsShouldNotGetAnyDiscount() {
-        assertEquals((double) 100, new Bill(100, new Customer(new DateTime())).netPayableAmount());
+        assertEquals(10.0, new Bill(10, new Customer(new DateTime())).netPayableAmount());
     }
 
     public void testCustomerOlderThan2YearsShouldGetAnyDiscount() {
-        assertEquals((double) 95, new Bill(100, new Customer(new DateTime(2009, 1, 1, 0, 0, 0, 0))).netPayableAmount());
+        assertEquals(9.5, new Bill(10, new Customer(new DateTime(2009, 1, 1, 0, 0, 0, 0))).netPayableAmount());
+    }
+
+    public void testForEvery100DollarOnBillUserShouldGet5DollarDiscount() {
+        assertEquals((double) 945, new Bill(990, new Customer(new DateTime())).netPayableAmount());
     }
 }
