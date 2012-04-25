@@ -12,8 +12,15 @@ import junit.framework.TestCase;
 
 public class BillingSystemTest extends TestCase {
 
-    public void testEmployeeShouldGet30percentDiscount(){
-
+    public void testEmployeeShouldGet30PercentDiscount() {
         assertEquals((double) 70, new EmployeeBill(100).netPayableAmount());
+    }
+
+    public void testAffiliateShouldGet10PercentDiscount() {
+        assertEquals((double) 90, new AffiliateBill(100).netPayableAmount());
+    }
+
+    public void testCustomerOlderThan2YearsShouldGet5PercentDiscount() {
+        assertEquals((double) 90, new AffiliateBill(100).netPayableAmount());
     }
 }
